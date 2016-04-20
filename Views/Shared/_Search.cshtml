@@ -1,0 +1,11 @@
+﻿@model SearchExampleMVC.ViewModels.SearchResultViewModel
+        @*Add Form To Partial Posting to your action and controller*@
+        @using (Html.BeginForm("_Search","Home"))
+        {
+            @Html.AntiForgeryToken()
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><input type="text" name="searchString" placeholder="Search" /></li>
+            </ul>
+            <label>@ViewBag.ErrorMessage</label>
+        }

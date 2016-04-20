@@ -1,0 +1,90 @@
+﻿@*model is the viewModel*@
+@model SearchExampleMVC.ViewModels.SearchResultViewModel
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+@*Form for Searching that posts to "MyAction" in "MyController"*@
+@using (Html.BeginForm("_Search", "Home"))
+{
+@Html.AntiForgeryToken()
+@Html.EditorFor(x => x.SearchString)
+    <input type="submit" value="Search" />
+}
+<h3>Products</h3>
+@if (string.IsNullOrWhiteSpace(ViewBag.ErrorMessage)) { 
+
+if (Model.Products.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                
+                <th>Description</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Products)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+if (Model.Categories.Count > 0)
+{
+
+
+<h3>Categories</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Categories)
+        {
+            <tr>
+                <td>@item.Name</td>
+                
+            </tr>
+        }
+    </tbody>
+</table>
+}
+if (Model.NewsPosts.Count > 0)
+{
+
+
+<h3>News</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Content</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.NewsPosts)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Content</td>
+            </tr>
+        }
+    </tbody>
+</table>
+}}
+@if (ViewBag.ErrorMessage != null)
+{
+    @ViewBag.ErrorMessage
+}
